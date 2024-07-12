@@ -1,0 +1,121 @@
+{
+    "Cora": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001,"max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":80,"max":120},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.2, "max": 17.5}
+
+        }
+    },
+    "Citeseer": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"max": 0.5555, "min": 0.0001},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"max": 0.9999,"min":0.0001},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":67,"max":101},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.2, "max": 17.5}
+
+        }
+	},
+    "Pubmed": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001,"max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"max": 0.9999,"min":0.0001},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":92,"max":138},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.2, "max": 17.5}
+        }
+	},
+    "Cornell": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":100,"max":151},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	},
+    "Texas": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":71,"max":107},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	},
+    "Wisconsin": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":108,"max":163},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	},
+    "Chameleon": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":665,"max":999},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	},
+    "Squirrel": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":4925,"max":7325},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	},
+    "Actor": {
+        "method": "random",
+        "metric": {"goal": "maximize", "name": "mean accuracy"},
+        "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.5555},
+            "layers": {"values": [[16],[16,16],[16,16,16],[32],[32,32],[32,32,32],[64],[64,64],[64,64,64],[128],[128,128],[128,128,128]]},
+            "dropout":{"min":0.0001,"max": 0.9999},
+            "weight_decay":{"min": 0.0001, "max": 0.5555},
+			"loops": {"min":808,"max":1212},
+			"tau":{"min": 1, "max": 500},
+			"C+": {"min": 0.7, "max": 21.2}
+        }
+	}
+}
