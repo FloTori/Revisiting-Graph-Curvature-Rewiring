@@ -20,7 +20,7 @@ def create_rewired_edge_index(data,hyperparameters,intermediate_node,remove_edge
 
     edge_index_rewired (torch.tensor):   The edge index of the rewired graph
     """
-    if curvaturetype not in ["BFc","BFc_3","BFc_mod","JLc","AFc_3","AFc_4"]:
+    if curvaturetype not in ["BFc","BFc3","BFcmod","JLc","AFc3","AFc4"]:
         raise NotImplementedError(
             f"{curvaturetype} not implemented.")
     
@@ -37,7 +37,7 @@ def create_rewired_edge_index(data,hyperparameters,intermediate_node,remove_edge
             progress_bar= False
                         )
         edge_index_rewired = torch_geometric.utils.to_undirected(torch.tensor(list(G_rewired.edges)).t())
-    elif curvaturetype == "BFc_3":
+    elif curvaturetype == "BFc3":
         G_rewired,_ = sdrf_BFc(
             data,
             loops=hyperparameters["loops"],
@@ -50,7 +50,7 @@ def create_rewired_edge_index(data,hyperparameters,intermediate_node,remove_edge
             progress_bar= False
                         )
         edge_index_rewired = torch_geometric.utils.to_undirected(torch.tensor(list(G_rewired.edges)).t())
-    elif curvaturetype == "BFc_mod":
+    elif curvaturetype == "BFcmod":
         G_rewired,_ = sdrf_JTc(
             data,
             loops=hyperparameters["loops"],
@@ -72,7 +72,7 @@ def create_rewired_edge_index(data,hyperparameters,intermediate_node,remove_edge
             progress_bar = False
                         )
         edge_index_rewired = torch_geometric.utils.to_undirected(torch.tensor(list(G_rewired.edges)).t())
-    elif curvaturetype == "AFc_3":
+    elif curvaturetype == "AFc3":
         G_rewired,_ = sdrf_AFc(
             data,
             loops=hyperparameters["loops"],
@@ -84,7 +84,7 @@ def create_rewired_edge_index(data,hyperparameters,intermediate_node,remove_edge
             progress_bar= False
                         )
         edge_index_rewired = torch_geometric.utils.to_undirected(torch.tensor(list(G_rewired.edges)).t())
-    elif curvaturetype == "AFc_4":
+    elif curvaturetype == "AFc4":
         G_rewired,_ = sdrf_AFc(
             data,
             loops=hyperparameters["loops"],
