@@ -83,7 +83,7 @@ def main():
     acc, test_acc = objective(wandb.config,
                               datasetname, dataset_lcc, data_lcc, curvature_type,
                               int_node, rewiring_run)
-    wandb.log({"mean accuracy": acc, "mean test accuracy": test_acc})
+    wandb.log({"mean_accuracy": acc, "mean_test_accuracy": test_acc})
 
 
 if sweep_id is None:
