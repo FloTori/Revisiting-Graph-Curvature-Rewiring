@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from torch_geometric.datasets import KarateClub,Planetoid,WebKB,Actor,WikipediaNetwork,Coauthor,Amazon
+from torch_geometric.datasets import KarateClub,Planetoid,WebKB,Actor,WikipediaNetwork,Coauthor,Amazon,LRGBDataset
 import torch_geometric as torch_geometric
 import torch_geometric.transforms as T
 
@@ -43,19 +43,28 @@ def get_dataset_graphs(name: str, data_dir=DEFAULT_DATA_PATH,make_undirected: bo
         dataset = TUDataset(root=path, name=name)
     elif name == "IMDB-BINARY":
         dataset = TUDataset(root=path, name=name)
+    elif name == "COLLAB":
+        dataset = TUDataset(root=path, name=name)
+    elif name in ["PASCALVOC-SP","COCO-SP"]:
+        dataset = LRGBDataset(root = path,name= name,split = "train"),LRGBDataset(root = path,name= name,split = "val"),LRGBDataset(root = path,name= name,split = "test")
     else:
         raise Exception(f"Unknown dataset: {name}")
     
     return dataset
 
-def load_data(name: str, make_undirected: bool = False):
-    dataset = get_dataset(name)
-    data = dataset[0]
-    G = torch_geometric.utils.to_networkx(data)
-    if data.is_undirected() or make_undirected:
-        G = G.to_undirected() #This is for Networkx to represent it as a undirected Graph (Otherwise it would 'plot' i->j and j->i as two different edges)
+def load_data(name: str,multiple_graphs: bool = False):
+    
+    if multiple_graphs:
+        dataset = get_dataset_graphs(name)
+        return dataset, None, None
+    else:
+        dataset = get_dataset(name)
+        data = dataset[0]
+        G = torch_geometric.utils.to_networkx(data)
+        if data.is_undirected():
+            G = G.to_undirected() #This is for Networkx to represent it as a undirected Graph (Otherwise it would 'plot' i->j and j->i as two different edges)
+        return dataset, data, G
 
-    return dataset,data,G
 
 def data_information(dataset,data):
     print()

@@ -57,6 +57,30 @@ class GCN(torch.nn.Module):
         x = self.conv2(x, edge_index)
         return F.log_softmax(x, dim=1)
 
+class GCN_MultiGraphNode(torch.nn.Module):
+    def __init__(
+        self, num_features: int, num_classes: int, hidden: List[int] = [64], dropout: float = 0.5
+    ):
+        super().__init__()
+        dims = [num_features] + hidden + [num_classes]
+        layers = []
+        for in_f, out_f in zip(dims[:-1], dims[1:]):
+            layers.append(GCNConv(in_f, out_f))
+        self.layers = ModuleList(layers)
+        self.dropout = Dropout(p=dropout)
+        self.act_fn = ReLU()
+
+    def forward(self, data: Data, device):
+        x, edge_index = data.x.float(), data.edge_index
+        for i, layer in enumerate(self.layers):
+            x = layer(x, edge_index)
+            if i == len(self.layers) - 1:
+                break
+            x = self.act_fn(x)
+            x = self.dropout(x)
+        return F.log_softmax(x, dim=1)
+
+
 class GCN_Graph(torch.nn.Module):
     def __init__(
         self, dataset, hidden: List[int] = [64], dropout: float = 0.5):

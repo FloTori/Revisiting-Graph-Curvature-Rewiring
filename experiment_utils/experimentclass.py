@@ -1,4 +1,4 @@
-from models.GCN import GCN,GCN_Toppingetal,GCN_Graph
+from models.GCN import GCN,GCN_Toppingetal,GCN_MultiGraphNode,GCN_Graph
 import torch 
 import torch.nn.functional as F
 import json
@@ -128,3 +128,41 @@ class GraphExperiment():
                 total_correct += pred.eq(y).sum().item()
                 
         return total_correct / sample_size
+
+class MultiGraphNodeExperiment():
+    def __init__(self, device, num_features, num_classes, hyperparameters,epochs=10000):
+        self.device = device
+        self.lr = hyperparameters["learning_rate"]
+        self.layers = hyperparameters["layers"]
+        self.weight_decay = hyperparameters["weight_decay"]
+        self.dropout = hyperparameters["dropout"]
+
+        self.model = GCN_MultiGraphNode(num_features, num_classes, self.layers, self.dropout).to(device)
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, weight_decay=self.weight_decay)
+        self.epoch = epochs
+
+    def train(self, train_loader):
+        self.model.train()
+        total_loss = 0
+        for batch in train_loader:
+            batch = batch.to(self.device)
+            self.optimizer.zero_grad()
+            out = self.model(batch, self.device)
+            loss = F.nll_loss(out, batch.y)
+            loss.backward()
+            self.optimizer.step()
+            total_loss += loss.item()
+        return total_loss
+
+    def eval(self, loader):
+        self.model.eval()
+        total_correct = 0
+        total_nodes = 0
+        with torch.no_grad():
+            for batch in loader:
+                batch = batch.to(self.device)
+                out = self.model(batch, self.device)
+                pred = out.argmax(dim=1)
+                total_correct += pred.eq(batch.y).sum().item()
+                total_nodes += batch.num_nodes
+        return total_correct / total_nodes
