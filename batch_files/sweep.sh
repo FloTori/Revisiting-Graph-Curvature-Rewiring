@@ -1,29 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=sweep
-#SBATCH --output=sweep_%A_%a.out
-#SBATCH --time=00:05:00
+#SBATCH --output=logs/sweep_%A_%a.out
+#SBATCH --time=10:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gres=shard:1
 #SBATCH --mem=16G
 #SBATCH -M anansi
-#
-# Submit a wandb sweep as a SLURM array of agents. Each array task runs one
-# wandb agent that consumes RUNS_PER_AGENT configs.
-#
-# Usage (Python side auto-registers sweep_id in config/sweep_registry.json):
-#
-#   sbatch --array=1-4 \
-#       --export=ALL,DATASET=Cora,CURVATURE=BFc,REWIRING=True,RUNS_PER_AGENT=10 \
-#       batch_files/sweep.sh
-#
-# Optional: pin an existing sweep_id (skips registry lookup, avoids the
-# first-run race where parallel array tasks each create their own sweep):
-#
-#   sbatch --array=1-4 \
-#       --export=ALL,DATASET=Cora,CURVATURE=BFc,REWIRING=True,RUNS_PER_AGENT=10,SWEEP_ID=abc123 \
-#       batch_files/sweep.sh
 
 module purge
 module load CUDA/12.6.0
